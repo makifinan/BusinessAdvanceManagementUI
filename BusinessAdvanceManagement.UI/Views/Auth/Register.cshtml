@@ -1,0 +1,41 @@
+﻿@model BusinessAdvanceManagement.Domain.ViewModel.Worker.WorkerRegistrationVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/Signup/signup.css" rel="stylesheet" />
+    <title>Kayıt Ol</title>
+</head>
+<body>
+    <div class="wrapper" >
+        <h1>Kayıt Ol</h1>
+        <form asp-controller="Auth" asp-action="Register" method="post">
+            <input asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerName" type="text" placeholder="Ad" />
+            <input asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerSurname" type="text" placeholder="Soyad" />
+            <input asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerEmail" type="email" placeholder="Email" />
+            <input asp-for="@Model.WorkerAddUserDTO.Password" type="password" placeholder="Şifre" />
+            <select asp-items="@Model.RoleList" asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerRolID">
+                <option value="" selected disabled>Ünvan Seçiniz</option>
+            </select>
+            <select  asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerManagerID">
+                <option value="" selected disabled>Yönetici Seçiniz</option>
+            </select>
+            <select asp-items="@Model.UnitList" asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerBirimID">
+                <option value="" selected disabled>Birim Seçiniz</option>
+            </select>
+            <button class="btn btn-success">Kayıt Ol</button>
+        </form>
+        <div class="member">
+            Zaten bir üyeyim ? <a asp-controller="Auth" asp-action="Login">Giriş Yap</a>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

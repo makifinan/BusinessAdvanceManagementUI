@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/Login/login.css" rel="stylesheet" />
+    <title>Giriş</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Giriş Yap</h1>
+        <form action="/" method="post">
+            <input type="text" placeholder="Email" />
+            <input type="password" placeholder="Password" />
+            <div class="recover" >
+                <a href="#">Şifremi unuttum</a>
+
+            </div>
+
+
+
+            <button class="btn btn-success">Kayıt Ol</button>
+        </form>
+        <div class="member">
+           Üye değil misin ? <a asp-controller="Auth" asp-action="Register">Kayıt Ol</a>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

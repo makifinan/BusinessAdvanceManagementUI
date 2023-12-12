@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="APIService\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessAdvanceManagement.Domain\BusinessAdvanceManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>
