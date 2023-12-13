@@ -1,6 +1,7 @@
 ﻿using BusinessAdvanceManagement.Core.Result;
 using BusinessAdvanceManagement.Domain.DTOs.Role;
 using BusinessAdvanceManagement.Domain.DTOs.Unit;
+using BusinessAdvanceManagement.Domain.DTOs.Worker;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,16 @@ namespace BusinessAdvanceManagement.Core.APIService
             if (result.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<GeneralReturnType<IEnumerable<RoleListDTO>>>(await result.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
+
+        public async Task<GeneralReturnType<IEnumerable<WorkerListDTO>>> GetAllWorker()
+        {
+            var result =await _httpClient.GetAsync("getallworker");
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<GeneralReturnType<IEnumerable<WorkerListDTO>>>(await result.Content.ReadAsStringAsync());
             }
             return null;
         }

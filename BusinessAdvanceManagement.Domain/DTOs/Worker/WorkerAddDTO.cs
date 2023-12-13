@@ -14,7 +14,7 @@ namespace BusinessAdvanceManagement.Domain.DTOs.Worker
         public string WorkerName { get; set; }
         public string WorkerSurname { get; set; }
         public string WorkerEmail { get; set; }
-        public string PasswordHash { get; set; }
-        public string PasswordSalt { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
     }
 }

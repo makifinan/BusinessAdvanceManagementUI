@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "2VB8MgbPTcW3wZB/aj8lg7o1U79iufecDF7xqYqiDKJlJxPuuidTVUNGEqkHvR42YavcrJagbN9tnD4tD27N2g==",
+  "dgSpecHash": "w5BA2pvZmC6baUxDV7jQLea+ofk13b/4EdIwiquC+F07f67FoF+byHzSatyrlMMKD5TIf5fRDG2acr0SDf7QaA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Akif\\Desktop\\BusinessAdvanceManagement\\MVCUI\\BusinessAdvanceManagement\\BusinessAdvanceManagement.UI\\BusinessAdvanceManagement.UI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Akif\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
+    "C:\\Users\\Akif\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\Akif\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\Akif\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Akif\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\Akif\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

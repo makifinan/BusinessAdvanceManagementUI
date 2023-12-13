@@ -125,3 +125,6 @@ C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\ref\BusinessAdvanceManagement.UI.dll
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\BusinessAdvanceManagement.UI.pdb
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\BusinessAdvanceManagement.UI.genruntimeconfig.cache
+C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\bin\Debug\net5.0\FluentValidation.dll
+C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
+C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll

@@ -16,18 +16,31 @@
         <h1>Kayıt Ol</h1>
         <form asp-controller="Auth" asp-action="Register" method="post">
             <input asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerName" type="text" placeholder="Ad" />
+            <span asp-validation-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerName"></span>
+
             <input asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerSurname" type="text" placeholder="Soyad" />
+            <span asp-validation-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerSurname"></span>
+
             <input asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerEmail" type="email" placeholder="Email" />
+            <span asp-validation-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerEmail"></span>
+
             <input asp-for="@Model.WorkerAddUserDTO.Password" type="password" placeholder="Şifre" />
+            <span asp-validation-for="@Model.WorkerAddUserDTO.Password"></span>
+
             <select asp-items="@Model.RoleList" asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerRolID">
                 <option value="" selected disabled>Ünvan Seçiniz</option>
             </select>
-            <select  asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerManagerID">
+            <span asp-validation-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerRolID"></span>
+
+            <select asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerManagerID" asp-items="@Model.WorkerList">
                 <option value="" selected disabled>Yönetici Seçiniz</option>
             </select>
+            <span asp-validation-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerManagerID"></span>
+
             <select asp-items="@Model.UnitList" asp-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerBirimID">
                 <option value="" selected disabled>Birim Seçiniz</option>
             </select>
+            <span asp-validation-for="@Model.WorkerAddUserDTO.WorkerAddDTO.WorkerBirimID"></span>
             <button class="btn btn-success">Kayıt Ol</button>
         </form>
         <div class="member">

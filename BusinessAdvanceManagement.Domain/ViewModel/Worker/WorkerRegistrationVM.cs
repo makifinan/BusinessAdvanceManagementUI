@@ -14,7 +14,7 @@ namespace BusinessAdvanceManagement.Domain.ViewModel.Worker
         public WorkerAddUserDTO WorkerAddUserDTO { get; set; }
         public List<SelectListItem> UnitList { get; set; }
         public List<SelectListItem> RoleList { get; set; }
-        
+        public List<SelectListItem> WorkerList { get; set; }
 
     }
 }

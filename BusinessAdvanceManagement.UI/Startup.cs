@@ -1,4 +1,5 @@
 using BusinessAdvanceManagement.Core.APIService;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,9 +24,11 @@ namespace BusinessAdvanceManagement.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddFluentValidation(f => f.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddHttpClient<GeneralApiService>(conf =>
+            { conf.BaseAddress = new Uri(Configuration["MyBaseUri"]); });
+            services.AddHttpClient<AuthApiService>(conf =>
             { conf.BaseAddress = new Uri(Configuration["MyBaseUri"]); });
         }
 
