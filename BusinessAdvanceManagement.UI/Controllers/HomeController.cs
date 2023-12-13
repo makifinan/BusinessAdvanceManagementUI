@@ -1,4 +1,6 @@
-﻿using BusinessAdvanceManagement.UI.Models;
+﻿using BusinessAdvanceManagement.Core.APIService;
+using BusinessAdvanceManagement.UI.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +14,18 @@ namespace BusinessAdvanceManagement.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly GeneralApiService _generalApiService;
+        public HomeController(ILogger<HomeController> logger, GeneralApiService generalApiService)
         {
             _logger = logger;
+            _generalApiService = generalApiService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var id = int.Parse(HttpContext.Session.GetString("WorkerRolID"));
+            var result = _generalApiService.GetByIDRolePage(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
+            return View(result.Result.Datas);
         }
 
         public IActionResult Privacy()
