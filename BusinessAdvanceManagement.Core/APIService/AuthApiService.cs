@@ -31,6 +31,18 @@ namespace BusinessAdvanceManagement.Core.APIService
             return JsonConvert.DeserializeObject<GeneralReturnType<WorkerAddDTO>>(await result.Content.ReadAsStringAsync());
         }
 
+        public async Task<WorkerListDTO> Login(WorkerLoginDTO  workerLoginDTO)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(workerLoginDTO));
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            var result = await _httpClient.PostAsync("login",content);
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<WorkerListDTO>(await result.Content.ReadAsStringAsync());
+            }
+            return null;
+        } 
+
 
     }
 }

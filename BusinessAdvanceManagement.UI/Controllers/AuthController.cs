@@ -54,7 +54,19 @@ namespace BusinessAdvanceManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Login()
         {
-            return View();
+
+            return View(new WorkerLoginDTO());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(WorkerLoginDTO workerLoginDTO)
+        {
+            var result = await _authApiService.Login(workerLoginDTO);
+            if (result==null)
+            {
+                return null;
+            }
+            return new EmptyResult();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model BusinessAdvanceManagement.Domain.DTOs.Worker.WorkerLoginDTO
 @{
     Layout = null;
 }
@@ -14,9 +14,9 @@
 <body>
     <div class="wrapper">
         <h1>Giriş Yap</h1>
-        <form action="/" method="post">
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+        <form asp-controller="Auth" asp-action="Login" method="post">
+            <input asp-for="Email" type="text" placeholder="Email" />
+            <input asp-for="Password" type="password" placeholder="Password" />
             <div class="recover" >
                 <a href="#">Şifremi unuttum</a>
 
