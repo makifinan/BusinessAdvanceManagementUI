@@ -128,3 +128,4 @@ C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\bin\Debug\net5.0\FluentValidation.dll
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\Razor\Views\Shared\Components\WorkerInformation\Default.cshtml.g.cs

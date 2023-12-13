@@ -1,6 +1,7 @@
 ﻿using BusinessAdvanceManagement.Core.APIService;
 using BusinessAdvanceManagement.Domain.DTOs.Worker;
 using BusinessAdvanceManagement.Domain.ViewModel.Worker;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -66,7 +67,13 @@ namespace BusinessAdvanceManagement.UI.Controllers
             {
                 return null;
             }
-            return new EmptyResult();
+            HttpContext.Session.SetString("ID",result.WorkerID.ToString());
+            HttpContext.Session.SetString("WorkerName",result.WorkerName.ToString());
+            HttpContext.Session.SetString("WorkerSurname",result.WorkerSurname.ToString());
+            HttpContext.Session.SetString("WorkerRolID",result.WorkerRolID.ToString());
+            HttpContext.Session.SetString("WorkerRoleName",result.RoleName.ToString());
+            HttpContext.Session.SetString("WorkerManagerID",result.WorkerManagerID.ToString());
+            return RedirectToAction("Index","Home");
         }
     }
 }

@@ -26,6 +26,15 @@ namespace BusinessAdvanceManagement.UI
         {
             services.AddControllersWithViews().AddFluentValidation(f => f.RegisterValidatorsFromAssemblyContaining<Startup>());
 
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".BusinessAdvanceManagement.Session";
+                options.IdleTimeout = TimeSpan.FromMinutes(30); 
+                options.Cookie.IsEssential = true;
+            });
+
+
             services.AddHttpClient<GeneralApiService>(conf =>
             { conf.BaseAddress = new Uri(Configuration["MyBaseUri"]); });
             services.AddHttpClient<AuthApiService>(conf =>
@@ -44,6 +53,8 @@ namespace BusinessAdvanceManagement.UI
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
