@@ -3,5 +3,32 @@
     ViewData["Title"] = "Add";
 }
 
-<h1>Add</h1>
+<link href="~/css/AdvanceRequest/addpage.css" rel="stylesheet" />
+<div class="container-fluid">
+    <h1>Yeni Avans Oluşturma Ekranı</h1>
+    <form class="form-group" action="/" method="post">
+        <div class="input-group">
+            <label>Avans Miktarı:</label>
+            <input type="text" placeholder="TL" />
+        </div>
+        <div class="input-group">
+            <label>İstenilen Tarih:</label>
+            <input type="datetime-local" >
+        </div>
+        <div class="input-group">
+            <label>Projeler</label>
+            <select>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Açıklama:</label>
+            <input type="text" placeholder="Açıklama giriniz." />
+        </div>
+        <div class="input-group">
+            <button class="btn btn-success">KAYDET</button>
+        </div>
+    </form>
+
+</div>
+
 
