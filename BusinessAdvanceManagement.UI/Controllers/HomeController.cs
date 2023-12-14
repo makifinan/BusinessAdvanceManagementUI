@@ -23,9 +23,7 @@ namespace BusinessAdvanceManagement.UI.Controllers
 
         public IActionResult Index()
         {
-            var id = int.Parse(HttpContext.Session.GetString("WorkerRolID"));
-            var result = _generalApiService.GetByIDRolePage(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
-            return View(result.Result.Datas);
+            return View();
         }
 
         public IActionResult Privacy()
