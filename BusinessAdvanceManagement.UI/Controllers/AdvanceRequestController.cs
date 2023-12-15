@@ -43,5 +43,12 @@ namespace BusinessAdvanceManagement.UI.Controllers
             }
             return new EmptyResult();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetByWorker()
+        {
+            var result = await _api.GetByWorker(int.Parse(HttpContext.Session.GetString("ID")));
+            return View(result.Datas);
+        }
     }
 }

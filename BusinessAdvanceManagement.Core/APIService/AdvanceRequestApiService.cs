@@ -31,5 +31,16 @@ namespace BusinessAdvanceManagement.Core.APIService
             return null;
         }
 
+        public async Task<GeneralReturnType<IEnumerable<AdvanceRequestListDTO>>> GetByWorker(int workerID)
+        {
+            var path =$"getbyworkeradvancerequest/{workerID}";
+            var result = await _httpClient.GetAsync(path);
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<GeneralReturnType<IEnumerable<AdvanceRequestListDTO>>>(await result.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
+
     }
 }
