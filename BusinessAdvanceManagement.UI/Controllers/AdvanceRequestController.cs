@@ -47,6 +47,7 @@ namespace BusinessAdvanceManagement.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetByWorker()
         {
+            ViewBag.rolId = HttpContext.Session.GetString("WorkerRolID");
             var result = await _api.GetByWorker(int.Parse(HttpContext.Session.GetString("ID")));
             return View(result.Datas);
         }

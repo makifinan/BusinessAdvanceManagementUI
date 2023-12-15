@@ -1,26 +1,81 @@
 ﻿@model IEnumerable<BusinessAdvanceManagement.Domain.DTOs.AdvanceRequest.AdvanceRequestListDTO>
-@{
-    ViewData["Title"] = "GetByWorker";
-}
+    <style>
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
 <div class="container-fluid">
     <h1>Geçmiş Avans Taleplerim</h1>
-    <div>
-        <table class="table table-responsive table-bordered border-dark">
+    <div class="table-responsive table-container">
+
+        <table class="table table-striped table-bordered border-dark">
             <thead>
                 <tr>
-                    <th></th>
+                    <th>Talep Tutarı</th>
+                    <th>Talep Oluşturulma Tarihi</th>
+                    <th>İstenilen Tarihi</th>
+                    <th>Proje</th>
+                    <th>Talep Durumu</th>
+                    <th>Onaylayan/Reddeden</th>
+                    <th>Onaylayan/Reddeden Unvan</th>
+                    <th>Onay/Red Tarihi</th>
+                    <th>Onaylanan Tutar</th>
+                    <th>Belirlenen Ödeme Tarihi</th>
+                    <th>Odeme Yapılan tarih</th>
+                    <th>Geri Ödeme Durumu</th>
+                    <th>Detay</th>
                 </tr>
 
             </thead>
             <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Amount</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.DesiredDate</td>
+                        <td>@item.ProjectName</td>
+                        <td>@item.StatuName</td>
+                        <td>@item.WorkerName @item.WorkerSurname</td>
+                        <td>@item.RoleName</td>
+                        <td>
+                            @if (item.ApprovalRejectionDate != DateTime.MinValue)
+                            {
+                                @item.ApprovalRejectionDate
+                            }
 
+                        </td>
+                        <td>
+                            @if (item.ConfirmedAmount != 0)
+                            {
+                                @item.ConfirmedAmount
+                            }
+                        </td>
+                        <td>
+                            @if (item.DeterminedPaymentDate != DateTime.MinValue)
+                            {
+                                @item.DeterminedPaymentDate
+                            }
+                        </td>
+                        <td>
+                            @if (item.PaymentMadeDate != DateTime.MinValue)
+                            {
+                                @item.PaymentMadeDate
+                            }
+                        </td>
+                        <td>@item.StatusName</td>
+                        <td>
+                            <a class="btn btn-link">
+                                <i class="far fa-hand-point-right"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                }
 
             </tbody>
-            <tr>
-                <td></td>
-            </tr>
-        </table>
 
+        </table>
     </div>
 
 
