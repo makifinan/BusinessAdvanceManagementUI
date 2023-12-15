@@ -1,4 +1,4 @@
-﻿
+﻿@model BusinessAdvanceManagement.Domain.ViewModel.AdvanceRequest.AdvanceRequestVM
 @{
     ViewData["Title"] = "Add";
 }
@@ -6,23 +6,23 @@
 <link href="~/css/AdvanceRequest/addpage.css" rel="stylesheet" />
 <div class="container-fluid">
     <h1>Yeni Avans Oluşturma Ekranı</h1>
-    <form class="form-group" action="/" method="post">
+    <form asp-controller="AdvanceRequest" asp-action="Add" class="form-group"  method="post">
         <div class="input-group">
             <label>Avans Miktarı:</label>
-            <input type="text" placeholder="TL" />
+            <input asp-for="@Model.AdvanceRequestAddDTO.Amount" type="text" placeholder="TL" />
         </div>
         <div class="input-group">
             <label>İstenilen Tarih:</label>
-            <input type="datetime-local" >
+            <input asp-for="@Model.AdvanceRequestAddDTO.DesiredDate" type="datetime-local" >
         </div>
         <div class="input-group">
             <label>Projeler</label>
-            <select>
+            <select asp-items="@Model.ProjectList" asp-for="@Model.AdvanceRequestAddDTO.ProjectID">
             </select>
         </div>
         <div class="input-group">
             <label>Açıklama:</label>
-            <input type="text" placeholder="Açıklama giriniz." />
+            <input asp-for="@Model.AdvanceRequestAddDTO.Description" type="text" placeholder="Açıklama giriniz." />
         </div>
         <div class="input-group">
             <button class="btn btn-success">KAYDET</button>
