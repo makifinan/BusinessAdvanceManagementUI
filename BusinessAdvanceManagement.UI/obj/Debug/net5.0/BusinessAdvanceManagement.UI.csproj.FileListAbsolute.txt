@@ -133,3 +133,4 @@ C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\Razor\Views\AdvanceRequest\Add.cshtml.g.cs
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\Razor\Views\Shared\Components\PageRole\Default.cshtml.g.cs
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\Razor\Views\AdvanceRequest\GetByWorker.cshtml.g.cs
+C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\Razor\Views\AdvanceRequestDetail\GetByRequest.cshtml.g.cs

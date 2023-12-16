@@ -1,0 +1,60 @@
+﻿@model BusinessAdvanceManagement.Domain.ViewModel.AdvanceRequestDetail.AdvanceRequestDetailListPageVM
+<style>
+    .table-container {
+        overflow-x: auto;
+    }
+</style>
+<div class="container-fluid">
+    <h1>Avans Talebi Tarihçesi</h1>
+    <div>
+        <div class="border">
+            <label>Talep No</label>
+            <label>@Model.AdvanceRequestListDTO.AdvanceRequestID</label>
+
+        </div>
+        <div></div>
+
+    </div>
+
+    <div class="table-responsive table-container">
+        <table class="table table-bordered border-dark">
+            <thead>
+                <tr>
+                    <th>işlem no</th>
+                    <th>Durum</th>
+                    <th>İşlem Zamanı</th>
+                    <th>İşlemi Yapan</th>
+                    <th>Sonraki Aşama Kullanıcısı</th>
+                    <th>Sonraki Durum</th>
+                    <th>Onaylanan Tutar</th>
+                    <th>Ödeme Yapılacak Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.AdvanceRequestDetailListDTO)
+                {
+                    <tr>
+                        <td>@item.AdvanceRequestDetailID</td>
+                        <td>@item.FristStatuName</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.FirstWorkerName @item.FristWorkerSurname</td>
+                        <td>@item.LastWorkerName @item.LastWorkerSurname</td>
+                        <td>@item.NextStatuName</td>
+                        <td>@item.ConfimedAmount</td>
+                        <td>
+                            @Model.AdvanceRequestListDTO.PaymentMadeDate
+                        </td>
+                    </tr>
+                   
+
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+
+
+</div>
+
+
