@@ -12,4 +12,8 @@
     <ProjectReference Include="..\BusinessAdvanceManagement.Domain\BusinessAdvanceManagement.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BusinessHelper\" />
+  </ItemGroup>
+
 </Project>

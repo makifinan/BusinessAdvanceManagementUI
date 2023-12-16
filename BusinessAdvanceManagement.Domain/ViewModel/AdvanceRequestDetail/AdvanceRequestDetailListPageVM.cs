@@ -12,5 +12,6 @@ namespace BusinessAdvanceManagement.Domain.ViewModel.AdvanceRequestDetail
     {
         public AdvanceRequestListDTO AdvanceRequestListDTO { get; set; }
         public IEnumerable<AdvanceRequestDetailListDTO> AdvanceRequestDetailListDTO { get; set; }
+        
     }
 }

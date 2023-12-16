@@ -35,7 +35,7 @@ namespace BusinessAdvanceManagement.UI.Controllers
             advanceRequestAddDTO.NextStatu = new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
             advanceRequestAddDTO.WorkerID = int.Parse(HttpContext.Session.GetString("ID"));
             advanceRequestAddDTO.NextStageUser = int.Parse(HttpContext.Session.GetString("WorkerManagerID"));
-
+            advanceRequestAddDTO.AdvanceRequestStatus=new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
             var result = await  _api.Add(advanceRequestAddDTO);
             if (result.Datas==null)
             {
