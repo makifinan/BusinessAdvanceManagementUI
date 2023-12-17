@@ -83,12 +83,12 @@
                 {
                     <tr>
                         <td>@item.AdvanceRequestDetailID</td>
-                        <td>@item.FristStatuName</td>
+                        <td>@item.FirstStatuName</td>
                         <td>@item.CreatedDate</td>
-                        <td>@item.FirstWorkerName @item.FristWorkerSurname</td>
+                        <td>@item.FirstWorkerName @item.FirstWorkerSurname</td>
                         <td>@item.LastWorkerName @item.LastWorkerSurname</td>
                         <td>@item.NextStatuName</td>
-                        <td>@item.ConfimedAmount</td>
+                        <td>@item.ConfirmedAmount</td>
                         <td>
                             @Model.OnlyAdvanceRequestListDTO.DeterminedPaymentDate
                         </td>
@@ -102,13 +102,13 @@
         </table>
     </div>
     <div class="bordered-div">
-        <form class="styled-form" action="/" method="post">
-            <input asp-for="@Model.RequestDetailAddDTO.AdvanceRequestID" type="hidden" id="hiddenInput" name="hiddenInput" value=@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID>
+        <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetailAdd" method="post">
+            <input asp-for="@Model.RequestDetailAddDTO.AdvanceRequestID" type="text" style="display: none;" value="@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID">
             <label>Uygun Görülen Tutar: </label>
             <input asp-for="@Model.RequestDetailAddDTO.ConfirmAmount" type="text" placeholder="Uygun gördüğünüz tutarı giriniz" />
             <br />
             <hr />
-            <button class="btn btn-danger" type="submit">RED</button><button class="btn btn-success" type="submit">Onay</button>
+            <button class="btn btn-danger" type="submit" name="operation" value="red">RED</button><button class="btn btn-success" type="submit" name="operation" value="add">Onay</button>
         </form>
         
 

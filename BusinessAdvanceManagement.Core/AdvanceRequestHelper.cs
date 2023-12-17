@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessAdvanceManagement.Core.APIService;
+using BusinessAdvanceManagement.Domain.DTOs.AdvanceRule;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,13 @@ namespace BusinessAdvanceManagement.Core
 {
     public class AdvanceRequestHelper
     {
+        //GeneralApiService _generalApi;
+
+        //public AdvanceRequestHelper(GeneralApiService generalApi)
+        //{
+        //    _generalApi = generalApi;
+        //}
+
         public int NextStatuHelper(int workerRolID)
         {
             if (workerRolID == 1)
@@ -61,5 +70,56 @@ namespace BusinessAdvanceManagement.Core
             }
             return 0;
         }
+
+        public int RequestDetailAddStatuHelper(int workerRolID)
+        {
+            if (workerRolID==2)
+            {
+                return 3;
+            }
+            if (workerRolID == 3)
+            {
+                return 5;
+            }
+            if (workerRolID == 4)
+            {
+                return 7;
+            }
+            if (workerRolID == 5)
+            {
+                return 9;
+            }
+            if (workerRolID == 5)
+            {
+                return 10;
+            }
+            return 0;
+        }
+        public int RequestDetailAddNextStageUserHelper(AdvanceRuleListDTO advanceRuleListDTO,decimal amount,int rolID)
+        {
+           
+            if (rolID==5)
+            {
+                //gm durumu
+                return 1;
+            }
+            else if (amount> advanceRuleListDTO.MaxValue)
+            {
+                //2 büyük demek olsun
+                return 2;
+            }
+            else if (amount< advanceRuleListDTO.MaxValue)
+            {
+                //3 küçük demek olsun
+                return 3;
+            }
+            else
+            {
+                return 4;
+            }
+            return 5;
+        }
+
+        
     }
 }

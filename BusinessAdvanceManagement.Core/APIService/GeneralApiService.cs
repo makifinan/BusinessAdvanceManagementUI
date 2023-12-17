@@ -1,4 +1,5 @@
 ﻿using BusinessAdvanceManagement.Core.Result;
+using BusinessAdvanceManagement.Domain.DTOs.AdvanceRule;
 using BusinessAdvanceManagement.Domain.DTOs.PageRole;
 using BusinessAdvanceManagement.Domain.DTOs.Project;
 using BusinessAdvanceManagement.Domain.DTOs.Role;
@@ -69,6 +70,16 @@ namespace BusinessAdvanceManagement.Core.APIService
             if (result.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<GeneralReturnType<IEnumerable<ProjectListDTO>>>(await result.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
+        public async Task<GeneralReturnType<IEnumerable<AdvanceRuleListDTO>>> GetByRoleIDRule(int roleID)
+        {
+            var path = $"getbyroleidrule/{roleID}";
+            var result = await _httpClient.GetAsync(path);
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<GeneralReturnType<IEnumerable<AdvanceRuleListDTO>>>(await result.Content.ReadAsStringAsync());
             }
             return null;
         }

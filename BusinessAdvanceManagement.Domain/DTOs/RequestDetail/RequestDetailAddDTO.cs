@@ -15,6 +15,7 @@ namespace BusinessAdvanceManagement.Domain.DTOs.RequestDetail
         public int NextStageUser { get; set; }
         public int NextStatu { get; set; }
         public int ConfirmAmount { get; set; }
+        //son rollerde ar tablosuna bu değerler üzerinden update atılacak
         public DateTime PaymentMadeDate { get; set; }
         public string AdvanceReceiptNumber { get; set; }
 

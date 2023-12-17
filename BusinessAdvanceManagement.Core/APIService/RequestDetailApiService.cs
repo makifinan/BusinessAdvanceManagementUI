@@ -40,5 +40,18 @@ namespace BusinessAdvanceManagement.Core.APIService
             }
             return null;
         }
+
+        public async Task<GeneralReturnType<RequestDetailAddDTO>> Add(RequestDetailAddDTO requestDetailAddDTO)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(requestDetailAddDTO));
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            var result = await _httpClient.PostAsync("addrequestdetail",content);
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<GeneralReturnType<RequestDetailAddDTO>>(await result.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
     }
 }
