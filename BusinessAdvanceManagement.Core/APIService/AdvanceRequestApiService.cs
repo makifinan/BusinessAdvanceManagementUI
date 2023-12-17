@@ -42,5 +42,16 @@ namespace BusinessAdvanceManagement.Core.APIService
             return null;
         }
 
+        public async Task<GeneralReturnType<IEnumerable<OnlyAdvanceRequestListDTO>>> GetByRequestID(int advanceRequestID)
+        {
+            var path = $"getbyrequestid/{advanceRequestID}";
+            var result = await _httpClient.GetAsync(path);
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<GeneralReturnType<IEnumerable<OnlyAdvanceRequestListDTO>>>(await result.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
+
     }
 }

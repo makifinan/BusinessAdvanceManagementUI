@@ -1,0 +1,120 @@
+﻿@model BusinessAdvanceManagement.Domain.ViewModel.RequestDetail.PendingApprovalDetailPageVM
+<style>
+    .table-container {
+        overflow-x: auto;
+    }
+    .bordered-div {
+        border: 2px solid #000;
+        padding: 10px; 
+    }
+    .styled-form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+    }
+
+        .styled-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .styled-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .styled-form hr {
+            border: none;
+            height: 1px;
+            background-color: #ccc;
+            margin: 16px 0;
+        }
+
+        .styled-form button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .styled-form button + button {
+                margin-left: 8px;
+            }
+</style>
+<div class="container-fluid">
+    <h1>Avans Talebi Tarihçesi</h1>
+    <div>
+        <div class="border">
+            <label>Talep No</label>
+            <label>@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID</label>
+
+        </div>
+        <div></div>
+
+    </div>
+
+    <div class="table-responsive table-container">
+        <table class="table table-bordered border-dark">
+            <thead>
+                <tr>
+                    <th>işlem no</th>
+                    <th>Durum</th>
+                    <th>İşlem Zamanı</th>
+                    <th>İşlemi Yapan</th>
+                    <th>Sonraki Aşama Kullanıcısı</th>
+                    <th>Sonraki Durum</th>
+                    <th>Onaylanan Tutar</th>
+                    <th>Ödeme Yapılacak Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.AdvanceRequestDetailListDTO)
+                {
+                    <tr>
+                        <td>@item.AdvanceRequestDetailID</td>
+                        <td>@item.FristStatuName</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.FirstWorkerName @item.FristWorkerSurname</td>
+                        <td>@item.LastWorkerName @item.LastWorkerSurname</td>
+                        <td>@item.NextStatuName</td>
+                        <td>@item.ConfimedAmount</td>
+                        <td>
+                            @Model.OnlyAdvanceRequestListDTO.DeterminedPaymentDate
+                        </td>
+                    </tr>
+
+
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+    <div class="bordered-div">
+        <form class="styled-form" action="/" method="post">
+            <input asp-for="@Model.RequestDetailAddDTO.AdvanceRequestID" type="hidden" id="hiddenInput" name="hiddenInput" value=@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID>
+            <label>Uygun Görülen Tutar: </label>
+            <input asp-for="@Model.RequestDetailAddDTO.ConfirmAmount" type="text" placeholder="Uygun gördüğünüz tutarı giriniz" />
+            <br />
+            <hr />
+            <button class="btn btn-danger" type="submit">RED</button><button class="btn btn-success" type="submit">Onay</button>
+        </form>
+        
+
+
+    </div>
+
+</div>
+
+

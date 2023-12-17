@@ -37,7 +37,7 @@
                             <td>@item.DesiredDate</td>
                             <td>@item.ProjectName </td>
                             <td>
-                                <a  class="btn btn-link">
+                                <a asp-controller="RequestDetail" asp-action="PendingApprovalDetail" asp-route-advanceRequestID="@item.AdvanceRequestID"  class="btn btn-link">
                                     <i class="far fa-hand-point-right"></i>
                                 </a>
                             </td>
@@ -84,7 +84,7 @@
                         <td>@item.EndConfirmDate</td>
                         <td>@item.EndConfirmAmount</td>
                         <td>
-                            <a class="btn btn-link">
+                            <a asp-controller="RequestDetail" asp-action="PendingApprovalDetail" asp-route-advanceRequestID="@item.AdvanceRequestID" class="btn btn-link">
                                 <i class="far fa-hand-point-right"></i>
                             </a>
                         </td>

@@ -7,13 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessAdvanceManagement.Domain.ViewModel.AdvanceRequestDetail
+namespace BusinessAdvanceManagement.Domain.ViewModel.RequestDetail
 {
-    public class AdvanceRequestDetailListPageVM
+    public class PendingApprovalDetailPageVM
     {
         public RequestDetailAddDTO RequestDetailAddDTO { get; set; }
-        public AdvanceRequestListDTO AdvanceRequestListDTO { get; set; }
+        public OnlyAdvanceRequestListDTO OnlyAdvanceRequestListDTO { get; set; }
         public IEnumerable<AdvanceRequestDetailListDTO> AdvanceRequestDetailListDTO { get; set; }
-        
     }
 }
