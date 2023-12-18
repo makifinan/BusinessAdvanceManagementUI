@@ -34,6 +34,10 @@ namespace BusinessAdvanceManagement.Core
             {
                 return 10;
             }
+            if (workerRolID==6)
+            {
+                return 12;
+            }
             return 0;
         }
 
@@ -88,6 +92,11 @@ namespace BusinessAdvanceManagement.Core
             {
                 return 10;
             }
+            if (workerRolID==6)
+            {
+                return 11;
+            }
+            
             return 0;
         }
         public int RequestDetailAddNextStageUserHelper(AdvanceRuleListDTO advanceRuleListDTO,decimal amount,int rolID)

@@ -46,6 +46,7 @@ namespace BusinessAdvanceManagement.UI.Controllers
             
             var viewModel = new PendingApprovalDetailPageVM()
             {
+                RoleID= int.Parse(HttpContext.Session.GetString("WorkerRolID")),
                 OnlyAdvanceRequestListDTO = _requestApi.GetByRequestID(advanceRequestID).Result.Datas.FirstOrDefault(),
                 AdvanceRequestDetailListDTO= _requestDetailApi.GetByRequest(advanceRequestID).Result.Datas
             };
@@ -63,6 +64,8 @@ namespace BusinessAdvanceManagement.UI.Controllers
                 {
                     requestDetailAddDTO.NextStageUser = 6;
                     requestDetailAddDTO.NextStatu = 10;
+                    requestDetailAddDTO.ApprovingDisapproving = int.Parse(HttpContext.Session.GetString("ID"));
+                    requestDetailAddDTO.ApprovingDisapprovingRole = int.Parse(HttpContext.Session.GetString("WorkerRolID"));
                 }
                 if (parametre1==2)
                 {
@@ -92,7 +95,22 @@ namespace BusinessAdvanceManagement.UI.Controllers
                 
                 var result = _api.Red(requestDetailAddDTO);
             }
-            
+            if (operation=="insert")
+            {
+                //fm
+                requestDetailAddDTO.StatuID = new AdvanceRequestHelper().RequestDetailAddStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
+                requestDetailAddDTO.CreatedDate = DateTime.Now;
+                requestDetailAddDTO.TransactionOwner = int.Parse(HttpContext.Session.GetString("ID"));
+                requestDetailAddDTO.RequestStatuID = 14;
+                requestDetailAddDTO.NextStageUser = 8;
+                requestDetailAddDTO.NextStatu = new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
+
+                var result = _api.Add(requestDetailAddDTO);
+            }
+            if (operation=="makbuz")
+            {
+
+            }
            
             return RedirectToAction("Index","Home");
         }

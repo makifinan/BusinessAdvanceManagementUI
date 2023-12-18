@@ -11,6 +11,7 @@ namespace BusinessAdvanceManagement.Domain.ViewModel.RequestDetail
 {
     public class PendingApprovalDetailPageVM
     {
+        public int RoleID { get; set; }
         public RequestDetailAddDTO RequestDetailAddDTO { get; set; }
         public OnlyAdvanceRequestListDTO OnlyAdvanceRequestListDTO { get; set; }
         public IEnumerable<AdvanceRequestDetailListDTO> AdvanceRequestDetailListDTO { get; set; }

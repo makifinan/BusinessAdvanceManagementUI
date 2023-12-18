@@ -53,7 +53,7 @@
             }
 </style>
 <div class="container-fluid">
-    <h1>Avans Talebi Tarihçesi</h1>
+    <h1>Onay Bekleyen Avans Talebi Detayı</h1>
     <div>
         <div class="border">
             <label>Talep No</label>
@@ -102,15 +102,40 @@
         </table>
     </div>
     <div class="bordered-div">
-        <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetailAdd" method="post">
-            <input asp-for="@Model.RequestDetailAddDTO.AdvanceRequestID" type="text" style="display: none;" value="@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID">
-            <label>Uygun Görülen Tutar: </label>
-            <input asp-for="@Model.RequestDetailAddDTO.ConfirmAmount" type="text" placeholder="Uygun gördüğünüz tutarı giriniz" />
-            <br />
-            <hr />
-            <button class="btn btn-danger" type="submit" name="operation" value="red">RED</button><button class="btn btn-success" type="submit" name="operation" value="add">Onay</button>
-        </form>
-        
+        @if (Model.RoleID == 6)
+        {
+            <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetailAdd" method="post">
+                <input asp-for="@Model.RequestDetailAddDTO.AdvanceRequestID" type="text" style="display: none;" value="@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID">
+                <label>Uygun görülen ödeme tarihi: </label>
+                <input asp-for="@Model.RequestDetailAddDTO.DeterminedPaymentDate" type="datetime-local" />
+                <br />
+                <hr />
+                <button class="btn btn-success" type="submit" name="operation" value="insert">Kaydet</button>
+            </form>
+        }
+        else if (Model.RoleID == 7)
+        {
+            <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetailAdd" method="post">
+                <input asp-for="@Model.RequestDetailAddDTO.AdvanceRequestID" type="text" style="display: none;" value="@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID">
+                <label>Avans Teslim Makbuz No: </label>
+                <input asp-for="@Model.RequestDetailAddDTO.AdvanceReceiptNumber" type="text" placeholder="makbuz no giriniz" />
+                <br />
+                <hr />
+                <button class="btn btn-success" type="submit" name="operation" value="makbuz">Onay</button>
+            </form>
+        }
+        else
+        {
+            <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetailAdd" method="post">
+                <input asp-for="@Model.RequestDetailAddDTO.AdvanceRequestID" type="text" style="display: none;" value="@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID">
+                <label>Uygun Görülen Tutar: </label>
+                <input asp-for="@Model.RequestDetailAddDTO.ConfirmAmount" type="text" placeholder="Uygun gördüğünüz tutarı giriniz" />
+                <br />
+                <hr />
+                <button class="btn btn-danger" type="submit" name="operation" value="red">RED</button><button class="btn btn-success" type="submit" name="operation" value="add">Onay</button>
+            </form>
+        }
+
 
 
     </div>
