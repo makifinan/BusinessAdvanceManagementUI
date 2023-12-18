@@ -136,3 +136,5 @@ C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\Razor\Views\AdvanceRequestDetail\GetByRequest.cshtml.g.cs
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\Razor\Views\RequestDetail\PendingApproval.cshtml.g.cs
 C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\obj\Debug\net5.0\Razor\Views\RequestDetail\PendingApprovalDetail.cshtml.g.cs
+C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\bin\Debug\net5.0\BusinessAdvanceManagement.Business.dll
+C:\Users\Akif\Desktop\BusinessAdvanceManagement\MVCUI\BusinessAdvanceManagement\BusinessAdvanceManagement.UI\bin\Debug\net5.0\BusinessAdvanceManagement.Business.pdb

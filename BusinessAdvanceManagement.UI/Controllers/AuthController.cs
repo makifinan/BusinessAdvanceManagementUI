@@ -1,4 +1,5 @@
-﻿using BusinessAdvanceManagement.Core.APIService;
+﻿using BusinessAdvanceManagement.Business.Validation.Worker;
+using BusinessAdvanceManagement.Core.APIService;
 using BusinessAdvanceManagement.Domain.DTOs.Worker;
 using BusinessAdvanceManagement.Domain.ViewModel.Worker;
 using Microsoft.AspNetCore.Http;
@@ -37,19 +38,31 @@ namespace BusinessAdvanceManagement.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(WorkerAddUserDTO workerAddUserDTO)
+        public async Task<IActionResult> Register(WorkerRegistrationVM wworkerAddUserDTO)
         {
-            if (!ModelState.IsValid)
+            var validator = new WorkerValidator();
+            var validationResult = validator.Validate(wworkerAddUserDTO);
+
+            if (!validationResult.IsValid)
             {
-                return View(workerAddUserDTO);
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+
+                return View(new WorkerRegistrationVM() {
+                    WorkerList = _generalApiService.GetAllWorker().Result.Datas.Select(w => new SelectListItem() { Text = w.WorkerName.ToString() + w.WorkerSurname.ToString(), Value = w.WorkerID.ToString() }).ToList(),
+                    RoleList = _generalApiService.GetAllRole().Result.Datas.Select(r => new SelectListItem() { Text = r.RoleName.ToString(), Value = r.RoleID.ToString() }).ToList(),
+                    UnitList = _generalApiService.GetAllUnit().Result.Datas.Select(u => new SelectListItem() { Text = u.UnitName, Value = u.UnitID.ToString() }).ToList()
+                });
             }
 
-            var result = await _authApiService.Register(workerAddUserDTO);
+            var result = await _authApiService.Register(wworkerAddUserDTO.WorkerAddUserDTO);
             if (result.Datas!=null)
             {
                 return RedirectToAction("Login", "Auth");
             }
-            return View(workerAddUserDTO);
+            return View(new WorkerRegistrationVM());
         }
 
         [HttpGet]

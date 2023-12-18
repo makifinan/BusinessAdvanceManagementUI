@@ -2514,6 +2514,21 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "BusinessAdvanceManagement.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "BusinessAdvanceManagement.Core": "1.0.0",
+          "BusinessAdvanceManagement.Domain": "1.0.0",
+          "FluentValidation.AspNetCore": "11.3.0"
+        },
+        "compile": {
+          "bin/placeholder/BusinessAdvanceManagement.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BusinessAdvanceManagement.Business.dll": {}
+        }
+      },
       "BusinessAdvanceManagement.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -8003,6 +8018,11 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "BusinessAdvanceManagement.Business/1.0.0": {
+      "type": "project",
+      "path": "../BusinessAdvanceManagement.Business/BusinessAdvanceManagement.Business.csproj",
+      "msbuildProject": "../BusinessAdvanceManagement.Business/BusinessAdvanceManagement.Business.csproj"
+    },
     "BusinessAdvanceManagement.Core/1.0.0": {
       "type": "project",
       "path": "../BusinessAdvanceManagement.Core/BusinessAdvanceManagement.Core.csproj",
@@ -8016,6 +8036,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "BusinessAdvanceManagement.Business >= 1.0.0",
       "BusinessAdvanceManagement.Core >= 1.0.0",
       "FluentValidation.AspNetCore >= 11.3.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2"
@@ -8048,6 +8069,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "C:\\Users\\Akif\\Desktop\\BusinessAdvanceManagement\\MVCUI\\BusinessAdvanceManagement\\BusinessAdvanceManagement.Business\\BusinessAdvanceManagement.Business.csproj": {
+              "projectPath": "C:\\Users\\Akif\\Desktop\\BusinessAdvanceManagement\\MVCUI\\BusinessAdvanceManagement\\BusinessAdvanceManagement.Business\\BusinessAdvanceManagement.Business.csproj"
+            },
             "C:\\Users\\Akif\\Desktop\\BusinessAdvanceManagement\\MVCUI\\BusinessAdvanceManagement\\BusinessAdvanceManagement.Core\\BusinessAdvanceManagement.Core.csproj": {
               "projectPath": "C:\\Users\\Akif\\Desktop\\BusinessAdvanceManagement\\MVCUI\\BusinessAdvanceManagement\\BusinessAdvanceManagement.Core\\BusinessAdvanceManagement.Core.csproj"
             }

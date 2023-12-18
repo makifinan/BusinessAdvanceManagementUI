@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BusinessAdvanceManagement.Business\BusinessAdvanceManagement.Business.csproj" />
     <ProjectReference Include="..\BusinessAdvanceManagement.Core\BusinessAdvanceManagement.Core.csproj" />
   </ItemGroup>
 
