@@ -74,18 +74,27 @@ namespace BusinessAdvanceManagement.UI.Controllers
                     //onay sınırları içerisinde, finans müdürüne ata
                     requestDetailAddDTO.NextStageUser = 6;
                     requestDetailAddDTO.NextStatu = 10;
+                    requestDetailAddDTO.ApprovingDisapproving= int.Parse(HttpContext.Session.GetString("ID"));
+                    requestDetailAddDTO.ApprovingDisapprovingRole= int.Parse(HttpContext.Session.GetString("WorkerRolID"));
                 }
 
                 requestDetailAddDTO.StatuID = new AdvanceRequestHelper().RequestDetailAddStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
                 requestDetailAddDTO.CreatedDate = DateTime.Now;
                 requestDetailAddDTO.TransactionOwner = int.Parse(HttpContext.Session.GetString("ID"));
-                
+                requestDetailAddDTO.RequestStatuID = new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
                 var result = _api.Add(requestDetailAddDTO);
             }
-
+            if (operation=="red")
+            {
+                requestDetailAddDTO.StatuID = 13;
+                requestDetailAddDTO.ApprovingDisapproving = int.Parse(HttpContext.Session.GetString("ID"));
+                requestDetailAddDTO.ApprovingDisapprovingRole = int.Parse(HttpContext.Session.GetString("WorkerRolID"));
+                
+                var result = _api.Red(requestDetailAddDTO);
+            }
             
            
-            return new EmptyResult();
+            return RedirectToAction("Index","Home");
         }
     }
 }

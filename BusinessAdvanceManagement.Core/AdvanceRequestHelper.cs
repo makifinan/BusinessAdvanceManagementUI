@@ -10,12 +10,7 @@ namespace BusinessAdvanceManagement.Core
 {
     public class AdvanceRequestHelper
     {
-        //GeneralApiService _generalApi;
-
-        //public AdvanceRequestHelper(GeneralApiService generalApi)
-        //{
-        //    _generalApi = generalApi;
-        //}
+        
 
         public int NextStatuHelper(int workerRolID)
         {
