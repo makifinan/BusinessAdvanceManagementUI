@@ -75,6 +75,21 @@ namespace BusinessAdvanceManagement.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(WorkerLoginDTO workerLoginDTO)
         {
+
+            var validator = new WorkerLoginValidator();
+            var validationResult = validator.Validate(workerLoginDTO);
+
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+
+                return View(workerLoginDTO);
+            }
+
+
             var result = await _authApiService.Login(workerLoginDTO);
             if (result==null)
             {
@@ -87,6 +102,13 @@ namespace BusinessAdvanceManagement.UI.Controllers
             HttpContext.Session.SetString("WorkerRoleName",result.RoleName.ToString());
             HttpContext.Session.SetString("WorkerManagerID",result.WorkerManagerID.ToString());
             return RedirectToAction("Index","Home");
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Auth");
         }
     }
 }

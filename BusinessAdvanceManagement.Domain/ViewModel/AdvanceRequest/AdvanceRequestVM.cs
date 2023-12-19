@@ -10,7 +10,7 @@ namespace BusinessAdvanceManagement.Domain.ViewModel.AdvanceRequest
 {
     public class AdvanceRequestVM
     {
-        //iki şeye ihtiyacım var AdvanceRequestAddDTO,Proje listesi select item türünde
+        
         public AdvanceRequestAddDTO AdvanceRequestAddDTO { get; set; }
         public List<SelectListItem> ProjectList { get; set; }
     }

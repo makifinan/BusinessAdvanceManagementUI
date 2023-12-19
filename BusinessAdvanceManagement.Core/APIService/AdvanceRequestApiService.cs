@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,14 @@ namespace BusinessAdvanceManagement.Core.APIService
             {
                 return JsonConvert.DeserializeObject<GeneralReturnType<IEnumerable<AdvanceRequestListDTO>>>(await result.Content.ReadAsStringAsync());
             }
+            else if (result.StatusCode==HttpStatusCode.NotFound)
+            {
+                var res = new GeneralReturnType<IEnumerable<AdvanceRequestListDTO>>();
+                res.Datas = null;
+                res.Message = "veri yok";
+                res.StatusCode = 400;
+                return res;
+            }
             return null;
         }
 
@@ -49,6 +58,24 @@ namespace BusinessAdvanceManagement.Core.APIService
             if (result.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<GeneralReturnType<IEnumerable<OnlyAdvanceRequestListDTO>>>(await result.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
+        public async Task<GeneralReturnType<IEnumerable<AdvanceRequestListsDTO>>> GetByApproving(int statuID)
+        {
+            var path = $"getbyapproving/{statuID}";
+            var result = await _httpClient.GetAsync(path);
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<GeneralReturnType<IEnumerable<AdvanceRequestListsDTO>>>(await result.Content.ReadAsStringAsync());
+            }
+            else if (result.StatusCode == HttpStatusCode.NotFound)
+            {
+                var res = new GeneralReturnType<IEnumerable<AdvanceRequestListsDTO>>();
+                res.Datas = null;
+                res.Message = "veri yok";
+                res.StatusCode = 400;
+                return res;
             }
             return null;
         }

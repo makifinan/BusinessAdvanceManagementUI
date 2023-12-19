@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,14 @@ namespace BusinessAdvanceManagement.Core.APIService
             if (result.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<GeneralReturnType<IEnumerable<ConfirmAdvanceListDTO>>>(await result.Content.ReadAsStringAsync());
+            }
+            else if (result.StatusCode==HttpStatusCode.NotFound)
+            {
+                var res = new GeneralReturnType<IEnumerable<ConfirmAdvanceListDTO>>();
+                res.Datas = null;
+                res.Message = "veri yok";
+                res.StatusCode = 400;
+                return res;
             }
             return null;
         }

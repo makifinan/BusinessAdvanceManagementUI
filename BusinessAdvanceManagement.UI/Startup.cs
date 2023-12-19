@@ -1,10 +1,12 @@
 using BusinessAdvanceManagement.Core.APIService;
+using BusinessAdvanceManagement.UI.Middleware;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +36,12 @@ namespace BusinessAdvanceManagement.UI
                 options.Cookie.IsEssential = true;
             });
 
-
+            services.AddLogging(logging =>
+            {
+                logging.ClearProviders();
+                logging.SetMinimumLevel(LogLevel.Trace);
+            });
+            NLog.LogManager.LoadConfiguration("nlog.config");
             services.AddHttpClient<GeneralApiService>(conf =>
             { conf.BaseAddress = new Uri(Configuration["MyBaseUri"]); });
             services.AddHttpClient<AuthApiService>(conf =>
@@ -65,7 +72,7 @@ namespace BusinessAdvanceManagement.UI
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

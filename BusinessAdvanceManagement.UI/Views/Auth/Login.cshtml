@@ -16,7 +16,9 @@
         <h1>Giriş Yap</h1>
         <form asp-controller="Auth" asp-action="Login" method="post">
             <input asp-for="Email" type="text" placeholder="Email" />
+            <span asp-validation-for="Email"></span>
             <input asp-for="Password" type="password" placeholder="Password" />
+            <span asp-validation-for="Password"></span>
             <div class="recover" >
                 <a href="#">Şifremi unuttum</a>
 

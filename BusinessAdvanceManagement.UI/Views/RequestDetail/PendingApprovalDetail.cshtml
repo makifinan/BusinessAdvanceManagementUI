@@ -5,7 +5,10 @@
     }
     .bordered-div {
         border: 2px solid #000;
-        padding: 10px; 
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .styled-form {
         background-color: #fff;
@@ -147,7 +150,7 @@
                 @foreach (var item in Model.AdvanceRequestDetailListDTO)
                 {
                     <tr>
-                        <td>@item.AdvanceRequestDetailID</td>
+                        <td>@item.RowNum</td>
                         <td>@item.FirstStatuName</td>
                         <td>@item.CreatedDate</td>
                         <td>@item.FirstWorkerName @item.FirstWorkerSurname</td>
@@ -169,10 +172,11 @@
     <div class="bordered-div">
         @if (Model.RoleID == 6)
         {
-            <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetailAdd" method="post">
+            <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetail" method="post">
                 <input asp-for="@Model.RequestDetailAddDTO.AdvanceRequestID" type="text" style="display: none;" value="@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID">
                 <label>Uygun görülen ödeme tarihi: </label>
                 <input asp-for="@Model.RequestDetailAddDTO.DeterminedPaymentDate" type="datetime-local" />
+                <span asp-validation-for="@Model.RequestDetailAddDTO.DeterminedPaymentDate"></span>
                 <br />
                 <hr />
                 <button class="btn btn-success" type="submit" name="operation" value="insert">Kaydet</button>
@@ -180,10 +184,11 @@
         }
         else if (Model.RoleID == 7)
         {
-            <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetailAdd" method="post">
+            <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetail" method="post">
                 <input asp-for="@Model.RequestDetailAddDTO.AdvanceRequestID" type="text" style="display: none;" value="@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID">
                 <label>Avans Teslim Makbuz No: </label>
                 <input asp-for="@Model.RequestDetailAddDTO.AdvanceReceiptNumber" type="text" placeholder="makbuz no giriniz" />
+                <span asp-validation-for="@Model.RequestDetailAddDTO.AdvanceReceiptNumber"></span>
                 <br />
                 <hr />
                 <button class="btn btn-success" type="submit" name="operation" value="makbuz">Onay</button>
@@ -191,10 +196,11 @@
         }
         else
         {
-            <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetailAdd" method="post">
+            <form class="styled-form" asp-controller="RequestDetail" asp-action="PendingApprovalDetail" method="post">
                 <input asp-for="@Model.RequestDetailAddDTO.AdvanceRequestID" type="text" style="display: none;" value="@Model.OnlyAdvanceRequestListDTO.AdvanceRequestID">
                 <label>Uygun Görülen Tutar: </label>
                 <input asp-for="@Model.RequestDetailAddDTO.ConfirmAmount" type="text" placeholder="Uygun gördüğünüz tutarı giriniz" />
+                <span asp-validation-for="@Model.RequestDetailAddDTO.ConfirmAmount"></span>
                 <br />
                 <hr />
                 <button class="btn btn-danger" type="submit" name="operation" value="red">RED</button><button class="btn btn-success" type="submit" name="operation" value="add">Onay</button>

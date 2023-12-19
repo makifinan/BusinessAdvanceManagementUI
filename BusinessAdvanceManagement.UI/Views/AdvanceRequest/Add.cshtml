@@ -4,26 +4,31 @@
 }
 
 <link href="~/css/AdvanceRequest/addpage.css" rel="stylesheet" />
-<div class="container-fluid">
+<div class="container-fluid wrapper">
     <h1>Yeni Avans Oluşturma Ekranı</h1>
-    <form asp-controller="AdvanceRequest" asp-action="Add" class="form-group"  method="post">
+    <form asp-controller="AdvanceRequest" asp-action="Add"  method="post">
         <div class="input-group">
             <label>Avans Miktarı:</label>
-            <input asp-for="@Model.AdvanceRequestAddDTO.Amount" type="text" placeholder="TL" />
+            <input asp-for="@Model.AdvanceRequestAddDTO.Amount"  type="text" placeholder="TL" />
+            <span asp-validation-for="@Model.AdvanceRequestAddDTO.Amount"></span>
         </div>
         <div class="input-group">
             <label>İstenilen Tarih:</label>
             <input asp-for="@Model.AdvanceRequestAddDTO.DesiredDate" type="datetime-local" >
+            <span asp-validation-for="@Model.AdvanceRequestAddDTO.DesiredDate"></span>
         </div>
         <div class="input-group">
-            <label>Projeler</label>
+            <label style="display:block">Projeler</label>
+            
             <select asp-items="@Model.ProjectList" asp-for="@Model.AdvanceRequestAddDTO.ProjectID">
             </select>
+            <span asp-validation-for="@Model.AdvanceRequestAddDTO.ProjectID"></span>
         </div>
         <div class="input-group">
             <label>Açıklama:</label>
             <input asp-for="@Model.AdvanceRequestAddDTO.Description" type="text" placeholder="Açıklama giriniz." />
         </div>
+        <span asp-validation-for="@Model.AdvanceRequestAddDTO.Description"></span>
         <div class="input-group">
             <button class="btn btn-success">KAYDET</button>
         </div>

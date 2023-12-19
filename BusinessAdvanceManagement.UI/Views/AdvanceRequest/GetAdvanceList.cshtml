@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BusinessAdvanceManagement.Domain.DTOs.AdvanceRequest.AdvanceRequestListsDTO>
+@{
+    ViewData["Title"] = "GetAdvanceList";
+}
+
+<h1>Avans Listeleri</h1>
+
+<div class="table-responsive table-container">
+    <table class="table table-bordered border-dark">
+       
+        
+            <thead>
+                <tr>
+                    <th>Çalışanın Adı:</th>
+                    <th>Unvanı</th>
+                    <th>Birimi</th>
+                    <th>Talep Tutarı</th>
+                    <th>Talep Oluşturma Tarihi</th>
+                    <th>İstenilen Tarih</th>
+                    <th>Proje</th>
+                    <th>Talep Durumu</th>
+                    <th>Onaylayan/Reddeden</th>
+                    <th>Onaylayan/Reddeden unvan</th>
+                    <th>Onay/Red tarihi</th>
+                    <th>Onaylanan Tutar</th>
+                    <th>Belirlenen Ödeme Tarihi</th>
+                    <th>Ödeme Yapılan Tarih</th>
+                    <th>Geri Ödeme durumu</th>
+                    <th>Detay</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.WorkerName @item.WorkerSurname</td>
+                        <td>@item.RoleName</td>
+                        <td>@item.UnitName</td>
+                        <td>@item.Amount</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.DesiredDate</td>
+                        <td>@item.ProjectName</td>
+                        <td>@item.StatuName</td>
+                        <td>@item.AppWorkerName @item.AppWorkerSurname</td>
+                        <td>@item.AppRoleName</td>
+                        <td>@item.ApprovalRejectionDate</td>
+                        <td>@item.ConfirmedAmount</td>
+                        <td>@item.DeterminedPaymentDate</td>
+                        <td>@item.PaymentMadeDate</td>
+                        <td>@item.StatusName</td>
+                        
+                        <td>
+                            <a asp-controller="RequestDetail" asp-action="PendingApprovalDetail" asp-route-advanceRequestID="@item.AdvanceRequestID" class="btn btn-link">
+                                <i class="far fa-hand-point-right"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+                    
+
+
+                
+
+            </tbody>
+        
+    </table>
+</div>

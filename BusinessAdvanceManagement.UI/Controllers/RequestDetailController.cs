@@ -1,4 +1,5 @@
-﻿using BusinessAdvanceManagement.Core;
+﻿using BusinessAdvanceManagement.Business.Validation.RequestDetail;
+using BusinessAdvanceManagement.Core;
 using BusinessAdvanceManagement.Core.APIService;
 using BusinessAdvanceManagement.Domain.DTOs.RequestDetail;
 using BusinessAdvanceManagement.Domain.ViewModel.AdvanceRequestDetail;
@@ -30,11 +31,15 @@ namespace BusinessAdvanceManagement.UI.Controllers
         [HttpGet]
         public IActionResult PendingApproval()
         {
-            var data = _api.GetAdvanceRequest(new AdvanceRequestHelper().StatuFilterQueryHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")))).Result.Datas;
+            var data = _api.GetAdvanceRequest(new AdvanceRequestHelper().StatuFilterQueryHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")))).Result;
+            if (data.Datas==null)
+            {
+                return RedirectToAction("Index","Home");
+            }
             var viewModel = new PendingApprovalPageVM()
             {
                 RolID = int.Parse(HttpContext.Session.GetString("WorkerRolID")),
-                ConfirmAdvanceListDTOs = data
+                ConfirmAdvanceListDTOs = data.Datas
             };
             
             return View(viewModel);
@@ -54,62 +59,116 @@ namespace BusinessAdvanceManagement.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult PendingApprovalDetailAdd(RequestDetailAddDTO requestDetailAddDTO, string operation)
+        public IActionResult PendingApprovalDetail(PendingApprovalDetailPageVM rrequestDetailAddDTO, string operation)
         {
+            var validator = new RequestDetailValidator();
+            var validationResult = validator.Validate(rrequestDetailAddDTO);
+            
+
             if (operation=="add")
             {
-                var parametre1 = new AdvanceRequestHelper().RequestDetailAddNextStageUserHelper(_generalApi.GetByRoleIDRule(int.Parse(HttpContext.Session.GetString("WorkerRolID"))).Result.Datas.FirstOrDefault(), _requestApi.GetByRequestID(requestDetailAddDTO.AdvanceRequestID).Result.Datas.FirstOrDefault().Amount, int.Parse(HttpContext.Session.GetString("WorkerRolID")));
+                var parametre1 = new AdvanceRequestHelper().RequestDetailAddNextStageUserHelper(_generalApi.GetByRoleIDRule(int.Parse(HttpContext.Session.GetString("WorkerRolID"))).Result.Datas.FirstOrDefault(), _requestApi.GetByRequestID(rrequestDetailAddDTO.RequestDetailAddDTO.AdvanceRequestID).Result.Datas.FirstOrDefault().Amount, int.Parse(HttpContext.Session.GetString("WorkerRolID")));
 
                 if (parametre1 == 1)
                 {
-                    requestDetailAddDTO.NextStageUser = 6;
-                    requestDetailAddDTO.NextStatu = 10;
-                    requestDetailAddDTO.ApprovingDisapproving = int.Parse(HttpContext.Session.GetString("ID"));
-                    requestDetailAddDTO.ApprovingDisapprovingRole = int.Parse(HttpContext.Session.GetString("WorkerRolID"));
+                    rrequestDetailAddDTO.RequestDetailAddDTO.NextStageUser = 6;
+                    rrequestDetailAddDTO.RequestDetailAddDTO.NextStatu = 10;
+                    rrequestDetailAddDTO.RequestDetailAddDTO.ApprovingDisapproving = int.Parse(HttpContext.Session.GetString("ID"));
+                    rrequestDetailAddDTO.RequestDetailAddDTO.ApprovingDisapprovingRole = int.Parse(HttpContext.Session.GetString("WorkerRolID"));
+                    rrequestDetailAddDTO.RequestDetailAddDTO.RequestStatuID = new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
                 }
                 if (parametre1==2)
                 {
-                    requestDetailAddDTO.NextStageUser = int.Parse(HttpContext.Session.GetString("WorkerManagerID"));
-                    requestDetailAddDTO.NextStatu = new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
+                    rrequestDetailAddDTO.RequestDetailAddDTO.NextStageUser = int.Parse(HttpContext.Session.GetString("WorkerManagerID"));
+                    rrequestDetailAddDTO.RequestDetailAddDTO.NextStatu = new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
+                    rrequestDetailAddDTO.RequestDetailAddDTO.RequestStatuID = new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
                 }
                 if (parametre1==3)
                 {
                     //onay sınırları içerisinde, finans müdürüne ata
-                    requestDetailAddDTO.NextStageUser = 6;
-                    requestDetailAddDTO.NextStatu = 10;
-                    requestDetailAddDTO.ApprovingDisapproving= int.Parse(HttpContext.Session.GetString("ID"));
-                    requestDetailAddDTO.ApprovingDisapprovingRole= int.Parse(HttpContext.Session.GetString("WorkerRolID"));
+                    rrequestDetailAddDTO.RequestDetailAddDTO.NextStageUser = 6;
+                    rrequestDetailAddDTO.RequestDetailAddDTO.NextStatu = 10;
+                    rrequestDetailAddDTO.RequestDetailAddDTO.ApprovingDisapproving= int.Parse(HttpContext.Session.GetString("ID"));
+                    rrequestDetailAddDTO.RequestDetailAddDTO.ApprovingDisapprovingRole= int.Parse(HttpContext.Session.GetString("WorkerRolID"));
+                    rrequestDetailAddDTO.RequestDetailAddDTO.RequestStatuID = 10;
                 }
 
-                requestDetailAddDTO.StatuID = new AdvanceRequestHelper().RequestDetailAddStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
-                requestDetailAddDTO.CreatedDate = DateTime.Now;
-                requestDetailAddDTO.TransactionOwner = int.Parse(HttpContext.Session.GetString("ID"));
-                requestDetailAddDTO.RequestStatuID = new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
-                var result = _api.Add(requestDetailAddDTO);
+                
+
+                if (!validationResult.IsValid)
+                {
+                    foreach (var error in validationResult.Errors)
+                    {
+                        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                    }
+
+                    return View(new PendingApprovalDetailPageVM()
+                    {
+                        RoleID = int.Parse(HttpContext.Session.GetString("WorkerRolID")),
+                        OnlyAdvanceRequestListDTO = _requestApi.GetByRequestID(rrequestDetailAddDTO.RequestDetailAddDTO.AdvanceRequestID).Result.Datas.FirstOrDefault(),
+                        AdvanceRequestDetailListDTO = _requestDetailApi.GetByRequest(rrequestDetailAddDTO.RequestDetailAddDTO.AdvanceRequestID).Result.Datas
+                    });
+                }
+
+                rrequestDetailAddDTO.RequestDetailAddDTO.StatuID = new AdvanceRequestHelper().RequestDetailAddStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
+                rrequestDetailAddDTO.RequestDetailAddDTO.CreatedDate = DateTime.Now;
+                rrequestDetailAddDTO.RequestDetailAddDTO.TransactionOwner = int.Parse(HttpContext.Session.GetString("ID"));
+               
+                var result = _api.Add(rrequestDetailAddDTO.RequestDetailAddDTO);
             }
             if (operation=="red")
             {
-                requestDetailAddDTO.StatuID = 13;
-                requestDetailAddDTO.ApprovingDisapproving = int.Parse(HttpContext.Session.GetString("ID"));
-                requestDetailAddDTO.ApprovingDisapprovingRole = int.Parse(HttpContext.Session.GetString("WorkerRolID"));
+                rrequestDetailAddDTO.RequestDetailAddDTO.ConfirmAmount = 0;
+                rrequestDetailAddDTO.RequestDetailAddDTO.StatuID = 13;
+                rrequestDetailAddDTO.RequestDetailAddDTO.ApprovingDisapproving = int.Parse(HttpContext.Session.GetString("ID"));
+                rrequestDetailAddDTO.RequestDetailAddDTO.ApprovingDisapprovingRole = int.Parse(HttpContext.Session.GetString("WorkerRolID"));
                 
-                var result = _api.Red(requestDetailAddDTO);
+                var result = _api.Red(rrequestDetailAddDTO.RequestDetailAddDTO);
             }
             if (operation=="insert")
             {
                 //fm
-                requestDetailAddDTO.StatuID = new AdvanceRequestHelper().RequestDetailAddStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
-                requestDetailAddDTO.CreatedDate = DateTime.Now;
-                requestDetailAddDTO.TransactionOwner = int.Parse(HttpContext.Session.GetString("ID"));
-                requestDetailAddDTO.RequestStatuID = 14;
-                requestDetailAddDTO.NextStageUser = 8;
-                requestDetailAddDTO.NextStatu = new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
+                rrequestDetailAddDTO.RequestDetailAddDTO.StatuID = new AdvanceRequestHelper().RequestDetailAddStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
+                rrequestDetailAddDTO.RequestDetailAddDTO.CreatedDate = DateTime.Now;
+                rrequestDetailAddDTO.RequestDetailAddDTO.TransactionOwner = int.Parse(HttpContext.Session.GetString("ID"));
+                rrequestDetailAddDTO.RequestDetailAddDTO.RequestStatuID = 14;
+                rrequestDetailAddDTO.RequestDetailAddDTO.NextStageUser = 8;
+                rrequestDetailAddDTO.RequestDetailAddDTO.NextStatu = new AdvanceRequestHelper().NextStatuHelper(int.Parse(HttpContext.Session.GetString("WorkerRolID")));
+                
+                if (!validationResult.IsValid)
+                {
+                    foreach (var error in validationResult.Errors)
+                    {
+                        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                    }
 
-                var result = _api.Add(requestDetailAddDTO);
+                    return View(new PendingApprovalDetailPageVM()
+                    {
+                        RoleID = int.Parse(HttpContext.Session.GetString("WorkerRolID")),
+                        OnlyAdvanceRequestListDTO = _requestApi.GetByRequestID(rrequestDetailAddDTO.RequestDetailAddDTO.AdvanceRequestID).Result.Datas.FirstOrDefault(),
+                        AdvanceRequestDetailListDTO = _requestDetailApi.GetByRequest(rrequestDetailAddDTO.RequestDetailAddDTO.AdvanceRequestID).Result.Datas
+                    });
+                }
+
+                var result = _api.Add(rrequestDetailAddDTO.RequestDetailAddDTO);
             }
             if (operation=="makbuz")
             {
+                
+                if (!validationResult.IsValid)
+                {
+                    foreach (var error in validationResult.Errors)
+                    {
+                        ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                    }
 
+                    return View(new PendingApprovalDetailPageVM()
+                    {
+                        RoleID = int.Parse(HttpContext.Session.GetString("WorkerRolID")),
+                        OnlyAdvanceRequestListDTO = _requestApi.GetByRequestID(rrequestDetailAddDTO.RequestDetailAddDTO.AdvanceRequestID).Result.Datas.FirstOrDefault(),
+                        AdvanceRequestDetailListDTO = _requestDetailApi.GetByRequest(rrequestDetailAddDTO.RequestDetailAddDTO.AdvanceRequestID).Result.Datas
+                    });
+                }
             }
            
             return RedirectToAction("Index","Home");
