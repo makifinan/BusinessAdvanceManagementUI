@@ -2,7 +2,7 @@
 
 Bu repo, BusinessAdvanceManagement için geliştirilen ASP.NET Core MVC projesini içermektedir. Aşağıda proje ile ilgili detayları bulabilirsiniz.
 
-## Kullanılan Teknolojiler
+##  Teknoloji&Mimari
 
 - **ASP.NET Core MVC:** Projenin temelini oluşturan ASP.NET Core MVC framework'ü.
 - **Katmanlı Mimari:** Proje, katmanlı mimari prensiplerine göre tasarlanmıştır. Aşağıda bulunan katmanlar mevcuttur:
